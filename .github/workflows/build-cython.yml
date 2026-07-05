@@ -21,7 +21,7 @@ jobs:
     steps:
       # 1. Repodaki kodları çek
       - name: Kodu çek
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # 2. Python kurulumu
       - name: Python ${{ matrix.python-version }} kurulumu
