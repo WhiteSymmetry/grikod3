@@ -18,11 +18,11 @@ if os.getenv("DEVELOPMENT") == "true":
 
 # Doğru modül adıyla içe aktarım yapın: grikod3.py → .grikod3
 try:
-    from .grikod3 import ikili_2_gri_kod, run_interactive_converter, InvalidBinaryError
+    from .grikod3 import ikili_2_gri_kod, run_interactive_converter, grikod2ikili, InvalidBinaryError
 except ImportError as e:
     warnings.warn(f"Gerekli modül yüklenemedi: {e}", ImportWarning)
 
-__all__ = ["ikili_2_gri_kod", "run_interactive_converter", "InvalidBinaryError"]
+__all__ = ["ikili_2_gri_kod", "run_interactive_converter", "grikod2ikili", "InvalidBinaryError"]
 
 def eski_fonksiyon():
     warnings.warn(
