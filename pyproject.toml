@@ -42,7 +42,7 @@ exclude = ["binder", "build*", "content", "data", "dist", "dist*", "docs", "docs
 include-package-data = true
 
 [tool.setuptools.package-data]
-"*" = ["*.py", "*.pyi"]  # Sadece Python dosyaları
+"*" = ["*.py", "*.pyi", "*.pyd", "*.so"]  # Sadece Python dosyaları
 
 [project.urls]
 Homepage = "https://github.com/WhiteSymmetry/grikod3"
