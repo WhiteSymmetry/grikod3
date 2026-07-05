@@ -1,1 +1,54 @@
+name: Cython Derlemeleri (Linux, Windows, macOS)
 
+# Workflow'u manuel olarak başlatmak için (Actions sekmesinden)
+on:
+  workflow_dispatch:
+  # İsterseniz aşağıdaki satırı açarak her 'push' işleminde çalışmasını sağlayabilirsiniz:
+  # push:
+  #   branches: [ main ]
+
+jobs:
+  build:
+    # Üç ana işletim sisteminde aynı anda çalıştırmak için matrix stratejisi
+    strategy:
+      fail-fast: false  # Biri başarısız olursa diğerleri devam etsin
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ['3.14']  # İstediğiniz Python sürümünü yazabilirsiniz (örn. '3.11', '3.12')
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      # 1. Repodaki kodları çek
+      - name: Kodu çek
+        uses: actions/checkout@v4
+
+      # 2. Python kurulumu
+      - name: Python ${{ matrix.python-version }} kurulumu
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # 3. Gerekli derleme araçlarını ve Cython'ı yükle
+      - name: Cython ve setuptools yükle
+        run: |
+          python -m pip install --upgrade pip
+          pip install cython setuptools
+
+      # 4. Derlemeyi çalıştır (setup.py dosyasını kullanarak)
+      - name: Cython derlemesi yap
+        run: |
+          python setup.py build_ext --inplace
+
+      # 5. Oluşan derlenmiş dosyaları platforma göre isimlendirerek kaydet
+      - name: Derlenmiş dosyaları yükle (Artefact olarak)
+        uses: actions/upload-artifact@v4
+        with:
+          # Artefakt ismine platform adını ekleyerek karışıklığı önle
+          name: derlenmis-${{ matrix.os }}
+          # Aşağıdaki desenler, oluşan tüm .so, .pyd ve .dylib dosyalarını yakalar
+          path: |
+            **/*.so
+            **/*.pyd
+            **/*.dylib
+          # Derleme dışı dosyaların gelmemesi için .py dosyalarını eklemiyoruz.
