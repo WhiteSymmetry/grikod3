@@ -25,7 +25,7 @@ jobs:
 
       # 2. Python kurulumu
       - name: Python ${{ matrix.python-version }} kurulumu
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
 
