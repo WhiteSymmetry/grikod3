@@ -6,6 +6,8 @@ import importlib
 import warnings
 import os
 
+__version__ = "0.1.1"
+
 # Geliştirme modunda yeniden yükleme (isteğe bağlı)
 if os.getenv("DEVELOPMENT") == "true":
     try:
@@ -21,8 +23,6 @@ except ImportError as e:
     warnings.warn(f"Gerekli modül yüklenemedi: {e}", ImportWarning)
 
 __all__ = ["ikili_2_gri_kod", "run_interactive_converter", "InvalidBinaryError"]
-
-__version__ = "1.1.4"
 
 def eski_fonksiyon():
     warnings.warn(
