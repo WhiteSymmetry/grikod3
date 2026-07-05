@@ -1,4 +1,4 @@
-# grikod3 (Grikod, Gri Kod, Gray Code, GrayCode)
+# grikod3 (Grikod, Gri Kod, Gray Code, GrayCode): binary ↔ grikod
 ---
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15352206.svg)](https://doi.org/10.5281/zenodo.15352206)
