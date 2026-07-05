@@ -1,0 +1,13 @@
+{
+  "title": "grikod3",
+  "upload_type": "software",
+  "description": "A Python library for converting binary numbers to Gray Code with ease.",
+  "creators": [
+    {
+      "name": "Keçeci, Mehmet",
+      "orcid": "0000-0001-9937-9839"
+    }
+  ],
+  "license": "mit-license",
+  "access_right": "open"
+}

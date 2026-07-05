@@ -1,9 +1,19 @@
-from setuptools import setup
-from Cython.Build import cythonize
+from setuptools import setup, find_packages
 
-# Buraya derlemek istediğiniz .py dosyasının adını yazın
-# Örnek: "benim_modulum.py" veya birden fazla dosya için ["mod1.py", "mod2.py"]
 setup(
-    ext_modules=cythonize("grikod3/grikod3.py"),
-    zip_safe=False,
+    name="grikod3",
+    use_scm_version=True,  # Sürüm bilgisini setuptools_scm ile alır
+    setup_requires=["setuptools", "wheel", "setuptools_scm"],  # Gerekli kurulum bağımlılıkları
+    version='0.1.0',
+    packages=find_packages(where="src"),  # src dizinindeki modülleri bul
+    package_dir={"": "src"},  # src dizinine yönlendirme
+    include_package_data=True,  # Ek dosyaları dahil et
+    install_requires=[
+        # Projenizin bağımlılıklarını buraya ekleyin
+    ],
+    author="Mehmet Keçeci",
+    description="Binary to Gray code conversion package for efficient data encoding.",
+    url="https://github.com/WhiteSymmetry/grikod3",
+    license="MIT",
+    python_requires='>=3.10',
 )

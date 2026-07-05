@@ -1,0 +1,38 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Gray Code
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file. / Eğer bu yazılımı
+  kullanıyorsanız, lütfen bu dosyadaki meta   verileri
+  kullanarak atıfta bulunun.
+type: software
+authors:
+  - given-names: Mehmet
+    family-names: Keçeci
+    email: bilginomi@yaani.com
+    orcid: 'https://orcid.org/0000-0001-9937-9839'
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.15352206
+  - type: doi
+    value: 10.48546/workflowhub.datafile.13.1
+repository-code: 'https://github.com/WhiteSymmetry/grikod3'
+url: 'https://github.com/WhiteSymmetry/grikod3'
+repository: 'https://anaconda.org/bilgi/grikod3'
+repository-artifact: 'https://pypi.org/project/grikod3/'
+abstract: >-
+  A Python package for converting binary numbers to Gray
+  code, designed for efficient data encoding and scientific
+  applications.
+keywords:
+  - Gri Kod2
+  - grikod3
+  - Binary
+  - Gray Code
+license: MIT
+commit: 'Revision: 1'
+version: 0.1.0
+date-released: '2025-05-06'
