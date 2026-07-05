@@ -13,7 +13,7 @@
 [![AGPL-3.0-or-later License](https://img.shields.io/badge/License-AGPL-3.0-or-later-yellow.svg)](https://opensource.org/licenses/AGPL-3.0-or-later)
 
 [![Python CI](https://github.com/WhiteSymmetry/grikod3/actions/workflows/python_ci.yml/badge.svg?branch=main)](https://github.com/WhiteSymmetry/grikod3/actions/workflows/python_ci.yml)
-[![codecov](https://codecov.io/gh/WhiteSymmetry/grikod3/graph/badge.svg?token=1SDH8E9RAJ)](https://codecov.io/gh/WhiteSymmetry/grikod3)
+[![codecov](https://codecov.io/gh/WhiteSymmetry/grikod3/graph/badge.svg?token=)](https://codecov.io/gh/WhiteSymmetry/grikod3)
 [![Documentation Status](https://readthedocs.org/projects/grikod3/badge/?version=latest)](https://grikod3.readthedocs.io/en/latest/)
 [![Binder](https://terrarium.evidencepub.io/badge_logo.svg)](https://terrarium.evidencepub.io/v2/gh/WhiteSymmetry/grikod3/HEAD)
 [![PyPI version](https://badge.fury.io/py/grikod3.svg)](https://badge.fury.io/py/grikod3)
