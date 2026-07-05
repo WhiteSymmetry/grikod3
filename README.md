@@ -10,7 +10,7 @@
 [![Anaconda-Server Badge](https://anaconda.org/bilgi/grikod3/badges/platforms.svg)](https://anaconda.org/bilgi/grikod3)
 [![Anaconda-Server Badge](https://anaconda.org/bilgi/grikod3/badges/license.svg)](https://anaconda.org/bilgi/grikod3)
 [![Open Source](https://img.shields.io/badge/Open%20Source-Open%20Source-brightgreen.svg)](https://opensource.org/)
-[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![AGPL-3.0-or-later License](https://img.shields.io/badge/License-AGPL-3.0-or-later-yellow.svg)](https://opensource.org/licenses/AGPL-3.0-or-later)
 
 [![Python CI](https://github.com/WhiteSymmetry/grikod3/actions/workflows/python_ci.yml/badge.svg?branch=main)](https://github.com/WhiteSymmetry/grikod3/actions/workflows/python_ci.yml)
 [![codecov](https://codecov.io/gh/WhiteSymmetry/grikod3/graph/badge.svg?token=1SDH8E9RAJ)](https://codecov.io/gh/WhiteSymmetry/grikod3)
@@ -49,10 +49,10 @@
             </td>
         </tr>
         <tr>
-            <td style="text-align: center;">License: MIT</td>
+            <td style="text-align: center;">License: AGPL-3.0-or-later</td>
             <td style="text-align: center;">
-                <a href="https://opensource.org/licenses/MIT">
-                    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License" height="18"/>
+                <a href="https://opensource.org/licenses/AGPL-3.0-or-later">
+                    <img src="https://img.shields.io/badge/License-AGPL-3.0-or-later-yellow.svg" alt="License" height="18"/>
                 </a>
             </td>
         </tr>
@@ -248,7 +248,7 @@ Keçeci, Mehmet. "grikod3". Zenodo, 06 Mayıs 2025. https://doi.org/10.5281/zeno
 ### Lisans (Türkçe) / License (English)
 
 ```
-This project is licensed under the MIT License.
+This project is licensed under the AGPL-3.0-or-later License.
 
 ```
 
@@ -304,7 +304,7 @@ Author: Mehmet Keçeci
 
 Author-email: Mehmet Keçeci <...>
 
-License: MIT License
+License: AGPL-3.0-or-later License
 
 Copyright (c) 2025 Mehmet Keçeci
 

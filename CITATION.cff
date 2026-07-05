@@ -32,7 +32,7 @@ keywords:
   - grikod3
   - Binary
   - Gray Code
-license: MIT
+license: AGPL-3.0-or-later
 commit: 'Revision: 1'
 version: 0.1.0
 date-released: '2025-05-06'

@@ -26,7 +26,7 @@ requirements:
 
 about:
   home: https://github.com/WhiteSymmetry/grikod3
-  license: MIT
+  license: AGPL-3.0-or-later
   summary: 'Binary to Gray code conversion package.'
   description: |
     Binary to Gray code conversion package.

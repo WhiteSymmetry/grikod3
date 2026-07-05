@@ -25,7 +25,7 @@ classifiers = [
     "Operating System :: POSIX",
     "Operating System :: Unix",
     "Operating System :: MacOS",
-    "License :: OSI Approved :: MIT License",
+    "License :: OSI Approved :: AGPL-3.0-or-later License",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
 ]
