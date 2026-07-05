@@ -31,7 +31,7 @@ classifiers = [
 ]
 
 [tool.setuptools_scm]
-version_file = "src/grikod3/_version.py"  # Sürüm bilgisinin bulunduğu dosya
+version_file = "grikod3/grikod3/_version.py"  # Sürüm bilgisinin bulunduğu dosya
 local_scheme = "no-local-version"
 
 [project.urls]
