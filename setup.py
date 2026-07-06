@@ -8,6 +8,12 @@ from setuptools import setup, find_packages
 import sys
 import os
 
+from Cython.Build import cythonize
+
+setup(
+    ext_modules=cythonize("grikod3/grikod3.py"),
+)
+
 # UTF-8 encoding sorunlarını çöz
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
