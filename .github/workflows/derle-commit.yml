@@ -41,29 +41,31 @@ jobs:
           else
             python${{ matrix.python-version }} setup.py build_ext --inplace --verbose
           fi
-          # Çıktıları listele
+          # Derleme çıktılarını listele
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             dir grikod3
           else
             ls -la grikod3
           fi
         shell: bash
-
-      - name: Derleme
-        run: |
-          python setup.py build_ext --inplace
-          ls -la grikod3/   # Kontrol için
       
       - name: Commit ve push (eğer dosyalar varsa)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git pull --rebase origin main || true
-          git add grikod3/*.so grikod3/*.pyd || true
-          if git diff --cached --quiet; then
-            echo "Değişiklik yok, commit atlanıyor."
+      
+          # Dosyaların var olup olmadığını kontrol et
+          if ls grikod3/*.so 1> /dev/null 2>&1 || ls grikod3/*.pyd 1> /dev/null 2>&1; then
+            git add grikod3/*.so grikod3/*.pyd || true
+            if git diff --cached --quiet; then
+              echo "Değişiklik yok, commit atlanıyor."
+            else
+              git commit -m "Derlenmiş uzantılar (py${{ matrix.python-version }} / ${{ matrix.os }})"
+              git push origin main
+            fi
           else
-            git commit -m "Derlenmiş uzantılar (py${{ matrix.python-version }} / ${{ matrix.os }})"
-            git push origin main
+            echo "⚠️ Derleme başarısız, dosyalar oluşmadı. Commit yapılmıyor."
+            # İsterseniz burada exit 1 ile workflow'u durdurabilirsiniz
           fi
         shell: bash
