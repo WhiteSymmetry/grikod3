@@ -41,7 +41,6 @@ jobs:
       - name: 🧪 Run tests
         run: pixi run test
 
-      - name: 🏗️ Paket Derle ve prefix.dev'e Yayınla (API Key ile)
-        run: pixi publish --target-channel https://prefix.dev
-        env:
-          PREFIX_DEV_TOKEN: ${{ secrets.PIXI_TOKEN }}
+      - name: 🏗️ Paket Derle ve prefix.dev'e Yayınla (Trusted Publishing)
+        # URL'in sonuna kendi kanal adınızı ekleyin
+        run: pixi publish --target-channel https://prefix.dev/bilgi
