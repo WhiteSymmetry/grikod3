@@ -41,6 +41,7 @@ jobs:
       - name: 🧪 Run tests
         run: pixi run test
 
-      - name: 🏗️ Paket Derle ve prefix.dev'e Yayınla (Trusted Publishing)
-        # pixi publish komutu "python -m build" gerektirmeden recipe dosyanızdan paketi kendi üretir.
-        run: pixi publish --target-channel https://prefix.devbilgi
+      - name: 🏗️ Paket Derle ve prefix.dev'e Yayınla (API Key ile)
+        run: pixi publish --target-channel https://prefix.dev
+        env:
+          PREFIX_DEV_TOKEN: ${{ secrets.PIXI_TOKEN }}
