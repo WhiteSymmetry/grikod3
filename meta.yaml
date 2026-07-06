@@ -23,11 +23,17 @@ source:
 build:
   number: 0
   noarch: python
-  #script: "{{ PYTHON }} -m pip install . -vv"
   script: |
-    {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  # --no-deps: Bağımlılıkları pip kurmasın (conda kuracak)
-  # --no-build-isolation: Daha hızlı build
+    echo "Current directory: $(pwd)"
+    echo "Files in current directory:"
+    ls -la
+    # Pip kurulumu için doğru dizinde olduğumuzdan emin olalım
+    if [ -f "setup.py" ] || [ -f "pyproject.toml" ]; then
+      {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+    else
+      echo "ERROR: setup.py or pyproject.toml not found!"
+      exit 1
+    fi
 
 requirements:
   host:
