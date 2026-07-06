@@ -1,8 +1,13 @@
 # pyproject.toml
 
 [build-system]
-requires = ["setuptools", "cython"]
+requires = ["setuptools", "cython>=3.0.0"]
 build-backend = "setuptools.build_meta"
+
+[tool.cibuildwheel]
+build = "cp311-* cp312-* cp313-* cp314-*"
+skip = "*-musllinux_*"
+archs = "auto64"
 
 [project]
 name = "grikod3"
