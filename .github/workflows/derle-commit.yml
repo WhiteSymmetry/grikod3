@@ -1,4 +1,4 @@
-name: Derle ve Commit Et (Tek Push)
+name: Derle ve Commit Et (Tek Push-upload ediyor) 
 
 on:
   workflow_dispatch:
