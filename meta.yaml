@@ -5,7 +5,6 @@ package:
   version: {{ version }}
 
 source:
-  path: .
   url: 
   blake2b-256: 
 
