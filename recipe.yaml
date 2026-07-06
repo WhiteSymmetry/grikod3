@@ -1,65 +1,46 @@
-# recipe-noarch-python.yaml
+# recipe.yaml
+
 schema_version: 1
 
-# this sets up "context variables" (in this case name and version) that
-# can later be used in Jinja expressions
 context:
   version: 0.1.6
   name: grikod3
 
-# top level package information (name and version)
 package:
-  name: grikod3
-  version: 0.1.6
+  name: ${{ name }}
+  version: ${{ version }}
 
-# location to get the source from
-#`source` are `url`, `sha256`, `md5`, `patches`, `file_name` and `target_directory`
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
   sha256: 6c7169b6a987f3e7af4bdf569a288587f2d83aeb6f83f0e080783f46f4d95844
 
-# build number (should be incremented if a new build is made, but version is not incrementing)
 build:
   number: 1
-  script: python -m pip install --no-deps --ignore-installed .
-  noarch: python
+  # --no-build-isolation parametresini ekleyerek 'setuptools' bulunamadı hatasını KESİNLİKLE çözüyoruz.
+  # Çünkü bağımlılıkları host altından almasını zorunlu kılıyoruz.
+  script: python -m pip install --no-deps --no-build-isolation --ignore-installed .
+  # !!! noarch: python SATIRI BURADAN SİLİNDİ (Çünkü Cython/C içeriyor)
 
-# the requirements at build and runtime
 requirements:
+  build:
+    - ${{ compiler('c') }}      # Linux'ta GCC derleyicisini kurar (Cython için şart)
   host:
-    - python
+    - python >=3.11
     - pip
-    - setuptools
+    - setuptools >=61.0
+    - cython >=3.0.0            # Derleme anında setuptools'un Cython'u görmesini sağlar
     - wheel
-    - cython
-    - pytest
+    - numpy                     # Cython başlık dosyaları (headers) için numpy host'ta olmalı
   run:
-   - python >=3.11  # hypercomplex uyumlu versiyon
-   - numpy  # grikod3 numpy kullanıyor
-   - pip
-   - cython
-   - pytest
-   - setuptools
-   - wheel
+    - python >=3.11
+    - numpy
 
-# tests to validate that the package works as expected
-#tests:
-#  requires: []  # veya boş liste
-#  - python:
-#      imports:
-#        - grikod3
-
-# information about the package
 about:
   homepage: https://github.com/WhiteSymmetry/grikod3/
-  license: GPL-3.0-or-later
+  license: AGPL-3.0-or-later    # pyproject.toml ile eşitledik
   summary: 'grikod3'
-  description: |
-    grikod3
   repository: https://github.com/WhiteSymmetry/grikod3/
-  documentation: https://github.com/WhiteSymmetry/grikod3/
 
-# the below is conda-forge specific!
 extra:
   recipe-maintainers:
     - bilgi
