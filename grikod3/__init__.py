@@ -7,7 +7,7 @@ import warnings
 import os
 import types
 
-__version__ = "0.1.4"
+__version__ = "0.1.5"
 
 # ---- 1. Modül yüklemeyi dene (önce derlenmiş, sonra kaynak) ----
 try:
