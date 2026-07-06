@@ -39,6 +39,8 @@ requirements:
    - pip
    - cython
    - pytest
+   - setuptools
+   - wheel
 
 # tests to validate that the package works as expected
 #tests:
