@@ -50,5 +50,6 @@ jobs:
         run: pixi run test
 
       - name: 🏗️ Paket Derle ve prefix.dev'e Yayınla (Trusted Publishing)
-        # --target-channel parametresine kendi kanal adresinizi yazın
-        run: pixi publish --target-channel bilgi https://prefix.dev
+        # URL'in sonuna kendi kanal adınızı ekleyin
+        run: pixi publish --target-channel https://prefix.dev/bilgi
+
