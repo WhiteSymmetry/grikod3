@@ -11,36 +11,42 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  url: https://pypi.org{{ name }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
   sha256: 6c7169b6a987f3e7af4bdf569a288587f2d83aeb6f83f0e080783f46f4d95844
 
 build:
   number: 1
-  # --no-build-isolation parametresini ekleyerek 'setuptools' bulunamadı hatasını KESİNLİKLE çözüyoruz.
-  # Çünkü bağımlılıkları host altından almasını zorunlu kılıyoruz.
   script: python -m pip install --no-deps --no-build-isolation --ignore-installed .
-  # !!! noarch: python SATIRI BURADAN SİLİNDİ (Çünkü Cython/C içeriyor)
+
+# 🌍 Paketinizin derleneceği tüm platformları buraya ekliyoruz:
+# (Linux, Windows, macOS Intel ve macOS Apple Silicon)
+build_platform:
+  - linux-64
+  - win-64
+  - osx-64
+  - osx-arm64
 
 requirements:
   build:
-    - ${{ compiler('c') }}      # Linux'ta GCC derleyicisini kurar (Cython için şart)
+    - ${{ compiler('c') }} # İşletim sistemine göre doğru C derleyicisini (GCC, MSVC, Clang) otomatik seçer
   host:
     - python >=3.11
     - pip
     - setuptools >=61.0
-    - cython >=3.0.0            # Derleme anında setuptools'un Cython'u görmesini sağlar
+    - cython >=3.0.0
     - wheel
-    - numpy                     # Cython başlık dosyaları (headers) için numpy host'ta olmalı
+    - numpy
   run:
     - python >=3.11
     - numpy
 
 about:
-  homepage: https://github.com/WhiteSymmetry/grikod3/
-  license: AGPL-3.0-or-later    # pyproject.toml ile eşitledik
+  homepage: https://github.com
+  license: AGPL-3.0-or-later
   summary: 'grikod3'
-  repository: https://github.com/WhiteSymmetry/grikod3/
+  repository: https://github.com
 
 extra:
   recipe-maintainers:
     - bilgi
+
