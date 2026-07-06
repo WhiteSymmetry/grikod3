@@ -6,7 +6,7 @@ import importlib
 import warnings
 import os
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 # Geliştirme modunda yeniden yükleme (isteğe bağlı)
 if os.getenv("DEVELOPMENT") == "true":
