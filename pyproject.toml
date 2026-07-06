@@ -28,6 +28,11 @@ setuptools = ">=61.0"
 cython = ">=3.0.0"
 compilers = "*"  # Linux ortamında Cython kodunu derlemek için GCC/Clang kurar
 
+[tool.pixi.build-system]
+# uv'nin dışarıdan izole ortam kurmasını engeller, conda ortamını kullandırır
+installer = "uv"
+no-build-isolation = true
+
 [tool.pixi.package.build-dependencies]
 setuptools = ">=61.0"
 cython = ">=3.0.0"
