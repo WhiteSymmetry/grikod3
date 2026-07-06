@@ -1,8 +1,9 @@
 [workspace]
 preview = ["pixi-build"]
 authors = ["Mehmet Keçeci <mkececi@yaani.com>"]
-channels = ["conda-forge"]
-platforms = ["linux-64"]
+channels = ["pypi", "https://prefix.dev", "conda-forge"]
+# 🌍 Tüm hedef platformları buraya da ekliyoruz:
+platforms = ["linux-64", "win-64", "osx-64", "osx-arm64"]
 name = "grikod3"
 version = "0.1.6"
 
