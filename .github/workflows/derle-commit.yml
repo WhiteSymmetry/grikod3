@@ -34,8 +34,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install cython setuptools wheel
 
-      - name: Derleme çıktılarını listele
+      - name: Derleme
         run: |
+          if [[ "$RUNNER_OS" == "Windows" ]]; then
+            py -${{ matrix.python-version }} setup.py build_ext --inplace
+          else
+            python${{ matrix.python-version }} setup.py build_ext --inplace
+          fi
+          # Çıktıları listele
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             dir grikod3
           else
