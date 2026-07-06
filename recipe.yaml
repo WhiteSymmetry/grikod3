@@ -32,11 +32,13 @@ requirements:
     - setuptools
     - wheel
     - cython
+    - pytest
   run:
    - python >=3.11  # hypercomplex uyumlu versiyon
    - numpy  # grikod3 numpy kullanıyor
    - pip
    - cython
+   - pytest
 
 # tests to validate that the package works as expected
 #tests:
