@@ -4,13 +4,13 @@
 import ast
 import io
 import re
-from setuptools import setup, find_packages
 import sys
 import os
-
+from setuptools import setup, find_packages
 from Cython.Build import cythonize
 
 setup(
+    name="grikod3",
     ext_modules=cythonize("grikod3/grikod3.py"),
     zip_safe=False,
 )
