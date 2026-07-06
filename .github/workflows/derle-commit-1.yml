@@ -1,0 +1,95 @@
+name: Derle ve Commit Et (Tek Job'da Topla)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Derle (${{ matrix.os }} / py${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ['3.11', '3.12', '3.13', '3.14']
+
+    steps:
+      - name: Kodu çek
+        uses: actions/checkout@v7
+
+      - name: Python kurulumu
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Windows derleyici araçları
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Gerekli paketleri yükle
+        run: |
+          python -m pip install --upgrade pip
+          pip install cython setuptools wheel
+
+      - name: Derleme
+        run: |
+          if [[ "$RUNNER_OS" == "Windows" ]]; then
+            py -${{ matrix.python-version }} setup.py build_ext --inplace --verbose
+          else
+            python${{ matrix.python-version }} setup.py build_ext --inplace --verbose
+          fi
+          # Derleme çıktılarını listele
+          if [[ "$RUNNER_OS" == "Windows" ]]; then
+            dir grikod3
+          else
+            ls -la grikod3
+          fi
+        shell: bash
+
+      - name: Derlenmiş dosyaları artefakt olarak yükle
+        uses: actions/upload-artifact@v7
+        with:
+          name: derlenmis-${{ matrix.os }}-py${{ matrix.python-version }}
+          path: |
+            grikod3/*.so
+            grikod3/*.pyd
+            grikod3/*.dylib
+          if-no-files-found: warn
+
+  push:
+    name: Tüm dosyaları topla ve commit et
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kodu çek
+        uses: actions/checkout@v7
+
+      - name: Tüm artefaktları indir
+        uses: actions/download-artifact@v7
+        with:
+          path: temp_artifacts
+
+      - name: Dosyaları grikod3/ klasörüne kopyala
+        run: |
+          mkdir -p grikod3
+          # Her artefakt klasörünün içindeki dosyaları grikod3/ altına kopyala
+          find temp_artifacts -type f \( -name "*.so" -o -name "*.pyd" -o -name "*.dylib" \) -exec cp -v {} grikod3/ \;
+          ls -la grikod3/
+        shell: bash
+
+      - name: Commit ve push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main || true
+          git add -f grikod3/*.so grikod3/*.pyd grikod3/*.dylib || true
+          if git diff --cached --quiet; then
+            echo "Değişiklik yok, commit atlanıyor."
+          else
+            git commit -m "Derlenmiş uzantılar (tüm platformlar ve Python sürümleri)"
+            git push origin main
+          fi
+        shell: bash
