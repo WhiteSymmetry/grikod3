@@ -67,4 +67,3 @@ __pycache__/
 !grikod3/*.so
 !grikod3/*.pyd
 !grikod3/*.dylib
-!grikod3/*.c
