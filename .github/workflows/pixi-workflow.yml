@@ -41,15 +41,6 @@ jobs:
       - name: 🧪 Run tests
         run: pixi run test
 
-      - name: 🏗️ Build package (Conda/Pixi formatı)
-        # prefix.dev bir Conda kanalıdır. Standart Python wheel paketleri yüklenemez.
-        # Paketi rattler-build veya pixi ile Conda paketi (.tar.bz2 veya .conda) olarak derlemelisiniz.
-        run: pixi run build
-
-      - name: 🧪 Run tests
-        run: pixi run test
-
       - name: 🏗️ Paket Derle ve prefix.dev'e Yayınla (Trusted Publishing)
-        # URL'in sonuna kendi kanal adınızı ekleyin
-        run: pixi publish --target-channel https://prefix.dev/bilgi
-
+        # pixi publish komutu "python -m build" gerektirmeden recipe dosyanızdan paketi kendi üretir.
+        run: pixi publish --target-channel https://prefix.devbilgi
