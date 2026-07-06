@@ -15,8 +15,8 @@ package:
 # location to get the source from
 #`source` are `url`, `sha256`, `md5`, `patches`, `file_name` and `target_directory`
 source:
-  url: 
-  sha256: 
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: 6c7169b6a987f3e7af4bdf569a288587f2d83aeb6f83f0e080783f46f4d95844
 
 # build number (should be incremented if a new build is made, but version is not incrementing)
 build:
