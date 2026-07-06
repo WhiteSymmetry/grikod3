@@ -47,6 +47,5 @@ jobs:
         run: pixi run build
 
       - name: 📤 prefix.dev'e Yükle (Trusted Publishing)
-        # Derlenen .conda veya .tar.bz2 paketlerini prefix.dev kanalınıza yükler.
-        # KANAL_ADINIZ kısmını prefix.dev'deki kendi kanal adınızla değiştirin.
-        run: pixi upload --channel bilgi output_klasörü/*.conda
+        # 'prefix' kelimesi komutun neresine yükleneceğini söyler. `--channel` bundan sonra gelmelidir.
+        run: pixi upload prefix --channel bilgi output/*.conda
