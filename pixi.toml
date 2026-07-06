@@ -14,6 +14,7 @@ license = "AGPL-3.0-or-later"
 [dependencies]
 python = ">=3.11"
 pip = ">=25.3"
+build = "*"        # <--- python -m build komutunun çalışması için bu şarttır
 numpy = ">=2.4.6"
 cython = ">=3.2.8"
 pytest = ">=9.1.1"
