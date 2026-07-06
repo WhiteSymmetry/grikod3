@@ -1,14 +1,14 @@
-name: Derle ve Commit Et
+name: Derle ve Commit Et (Tek Push)
 
 on:
   workflow_dispatch:
 
 permissions:
-  contents: write   # 🔑 Push izni
+  contents: write
 
 jobs:
-  build_and_commit:
-    name: Derle ve commit et (${{ matrix.os }} / py${{ matrix.python-version }})
+  build:
+    name: Derle (${{ matrix.os }} / py${{ matrix.python-version }})
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -48,19 +48,47 @@ jobs:
             ls -la grikod3
           fi
         shell: bash
-      
+
+      - name: Derlenmiş dosyaları artefakt olarak kaydet
+        uses: actions/upload-artifact@v7
+        with:
+          name: derlenmis-${{ matrix.os }}-py${{ matrix.python-version }}
+          path: |
+            grikod3/*.so
+            grikod3/*.pyd
+            grikod3/*.dylib
+          if-no-files-found: ignore
+
+  push:
+    name: Tüm dosyaları topla ve push et
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kodu çek
+        uses: actions/checkout@v7
+
+      - name: Tüm artefaktları indir
+        uses: actions/download-artifact@v7
+        with:
+          path: artifacts
+
+      - name: Derlenmiş dosyaları grikod3/ klasörüne kopyala
+        run: |
+          mkdir -p grikod3
+          find artifacts -type f \( -name "*.so" -o -name "*.pyd" -o -name "*.dylib" \) -exec cp -v {} grikod3/ \;
+          ls -la grikod3/
+        shell: bash
+
       - name: Commit ve push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # Değişiklikleri stash'le
-          git stash || true
-          # Uzaktaki değişiklikleri çek
-          git pull --rebase origin main || true
-          # Stash'ten değişiklikleri geri al (çakışma olursa manuel çözüm gerekir)
-          git stash pop || true
-          # Derlenmiş dosyaları ekle
-          git add -f grikod3/*.so grikod3/*.pyd || true
-          git commit -m "Derlenmiş uzantılar (py${{ matrix.python-version }} / ${{ matrix.os }})" || echo "Değişiklik yok"
-          git push origin main || true
+          git add -f grikod3/*.so grikod3/*.pyd grikod3/*.dylib || true
+          if git diff --cached --quiet; then
+            echo "Değişiklik yok, commit atlanıyor."
+          else
+            git commit -m "Derlenmiş uzantılar (tüm platformlar ve Python sürümleri)"
+            git pull --rebase origin main || true
+            git push origin main
+          fi
         shell: bash
