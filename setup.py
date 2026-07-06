@@ -1,21 +1,21 @@
 # -*- coding: utf-8 -*-
 # setup.py
 
-import sys
-import platform
+# -*- coding: utf-8 -*-
 from setuptools import setup, Extension
 from Cython.Build import cythonize
 
 extensions = [
-    Extension("grikod3.grikod3", ["grikod3/grikod3.py"]),
+    Extension(
+        name="grikod3.grikod3",          # Sabit kalmalı, import edilecek ad
+        sources=["grikod3/grikod3.py"],  # Kaynak dosyanın yolu
+    )
 ]
 
 setup(
-    ext_modules=cythonize(extensions, compiler_directives={'language_level': 3}),
-)
-
-
-ext = Extension(
-    name=f"grikod3.grikod3_{platform.system()}_py{sys.version_info.major}{sys.version_info.minor}",
-    sources=["grikod3/grikod3.py"]
+    ext_modules=cythonize(
+        extensions,
+        compiler_directives={'language_level': 3},  # Python 3 sözdizimi
+    ),
+    zip_safe=False,
 )
