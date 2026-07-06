@@ -20,12 +20,14 @@ jobs:
           python-version: '3.x'
 
       - name: Build wheels with cibuildwheel
-        uses: pypa/cibuildwheel@v2.22.0
+        uses: pypa/cibuildwheel@v4.1.0  # 🆕 En son sürüm
         env:
-          CIBW_BUILD: "cp311-* cp312-* cp313-* cp314-*"
-          CIBW_PRERELEASE_PYTHONS: True   # 🆕 3.14 gibi prerelease sürümleri dahil et
-          CIBW_ARCHS: auto64
-          CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
+          # 3.11'den 3.15'e kadar tüm sürümler
+          CIBW_BUILD: "cp311-* cp312-* cp313-* cp314-* cp315-*"
+          # Python 3.15 için opt-in gerekebilir (dökümana göre)
+          CIBW_ENABLE: "cpython-prerelease"
+          CIBW_ARCHS: "auto64"
+          CIBW_MANYLINUX_X86_64_IMAGE: "manylinux_2_28"
 
       - name: Upload wheels as artifacts
         uses: actions/upload-artifact@v7
