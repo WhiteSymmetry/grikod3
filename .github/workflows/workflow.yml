@@ -1,7 +1,7 @@
 name: Publish to PyPI (manylinux uyumlu)
 
 on:
-  workflow_dispatch:   # Sadece manuel tetikleme
+  workflow_dispatch:
 
 jobs:
   build_wheels:
@@ -12,8 +12,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
+      - uses: actions/checkout@v7
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -27,7 +26,7 @@ jobs:
           CIBW_ARCHS: auto64
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
 
-      - name: Upload wheels as artifacts (opsiyonel)
+      - name: Upload wheels as artifacts
         uses: actions/upload-artifact@v7
         with:
           name: wheels-${{ matrix.os }}
@@ -38,7 +37,7 @@ jobs:
     needs: build_wheels
     runs-on: ubuntu-latest
     permissions:
-      id-token: write   # OIDC token için
+      id-token: write
       contents: read
 
     steps:
@@ -46,6 +45,14 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           path: dist
+
+      - name: Move wheels to root dist directory
+        run: |
+          find dist -type f -name "*.whl" -exec mv -v {} dist/ \;
+          # Boş klasörleri temizle
+          find dist -type d -empty -delete
+          ls -la dist/
+        shell: bash
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@v1.14.0
