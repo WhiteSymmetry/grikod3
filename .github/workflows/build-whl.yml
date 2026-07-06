@@ -33,7 +33,7 @@ jobs:
           CIBW_BUILD: "cp311-* cp312-* cp313-* cp314-*"
           CIBW_SKIP: "*-musllinux_*"
           CIBW_ARCHS: "auto64"
-          CIBW_BUILD_VERBOSITY: 3   # Detaylı log için
+          CIBW_BUILD_VERBOSITY: 3
 
       - name: Upload wheels
         uses: actions/upload-artifact@v7
