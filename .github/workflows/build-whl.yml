@@ -12,13 +12,23 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
+      - uses: actions/checkout@v7
 
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install cython setuptools wheel
+
+      # Test derlemesi (hata varsa burada yakalanır)
+      - name: Test Cython compilation
+        run: |
+          python setup.py build_ext --inplace
+          ls -la grikod3/
 
       - name: Install cibuildwheel
         run: pip install cibuildwheel
@@ -29,9 +39,9 @@ jobs:
           CIBW_BUILD: "cp311-* cp312-* cp313-* cp314-*"
           CIBW_SKIP: "*-musllinux_*"
           CIBW_ARCHS: "auto64"
-          CIBW_BUILD_VERBOSITY: 1   # Detaylı log için
+          CIBW_BUILD_VERBOSITY: 3   # Detaylı log
 
-      - name: Upload wheels as artifacts
+      - name: Upload wheels
         uses: actions/upload-artifact@v7
         with:
           name: wheels-${{ matrix.os }}
