@@ -31,7 +31,7 @@ jobs:
         uses: prefix-dev/setup-pixi@v0.10.0
         with:
           pixi-version: "latest"
-          cache: true
+          cache: false # Kilit dosyası uyuşmazlığından doğan hatayı tamamen devre dışı bırakır
 
       - name: 📦 Install dependencies
         run: pixi install --frozen
