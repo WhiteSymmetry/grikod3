@@ -49,4 +49,4 @@ jobs:
       - name: 📤 prefix.dev'e Yükle (Trusted Publishing)
         # Derlenen .conda veya .tar.bz2 paketlerini prefix.dev kanalınıza yükler.
         # KANAL_ADINIZ kısmını prefix.dev'deki kendi kanal adınızla değiştirin.
-        run: pixi upload --channel KANAL_ADINIZ output_klasörü/*.conda
+        run: pixi upload --channel bilgi output_klasörü/*.conda
