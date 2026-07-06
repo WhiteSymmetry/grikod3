@@ -1,4 +1,4 @@
-name: Build wheels
+name: Build wheels with cibuildwheel
 
 on:
   workflow_dispatch:
@@ -12,15 +12,27 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
-      - uses: actions/checkout@v7
+      - name: Checkout code
+        uses: actions/checkout@v7
 
-      - uses: pypa/cibuildwheel@v2.22.0
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install cibuildwheel
+        run: pip install cibuildwheel
+
+      - name: Build wheels
+        run: cibuildwheel --output-dir wheelhouse
         env:
-          CIBW_BUILD: cp311-* cp312-* cp313-* cp314-*
+          CIBW_BUILD: "cp311-* cp312-* cp313-* cp314-*"
           CIBW_SKIP: "*-musllinux_*"
-          CIBW_ARCHS: auto64
+          CIBW_ARCHS: "auto64"
+          CIBW_BUILD_VERBOSITY: 1   # Detaylı log için
 
-      - uses: actions/upload-artifact@v7
+      - name: Upload wheels as artifacts
+        uses: actions/upload-artifact@v7
         with:
           name: wheels-${{ matrix.os }}
           path: wheelhouse/*.whl
