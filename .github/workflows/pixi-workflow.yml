@@ -46,6 +46,9 @@ jobs:
         # Paketi rattler-build veya pixi ile Conda paketi (.tar.bz2 veya .conda) olarak derlemelisiniz.
         run: pixi run build
 
-      - name: 📤 prefix.dev'e Yükle (Trusted Publishing)
-        # 'prefix' kelimesi komutun neresine yükleneceğini söyler. `--channel` bundan sonra gelmelidir.
-        run: pixi upload prefix --channel bilgi output/*.conda
+      - name: 🧪 Run tests
+        run: pixi run test
+
+      - name: 🏗️ Paket Derle ve prefix.dev'e Yayınla (Trusted Publishing)
+        # --target-channel parametresine kendi kanal adresinizi yazın
+        run: pixi publish --target-channel bilgi https://prefix.dev
