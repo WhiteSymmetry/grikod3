@@ -6,14 +6,12 @@ import io
 import re
 import sys
 import os
-from setuptools import setup, find_packages
+from setuptools import setup, Extension, find_packages
 from Cython.Build import cythonize
 
-setup(
-    name="grikod3",
-    ext_modules=cythonize("grikod3/grikod3.py"),
-    zip_safe=False,
-)
+extensions = [
+    Extension("grikod3.grikod3", ["grikod3/grikod3.py"]),
+]
 
 # UTF-8 encoding sorunlarını çöz
 with open("README.md", "r", encoding="utf-8") as fh:
@@ -53,14 +51,16 @@ def get_install_requires():
 
 setup(
     name="grikod3",
-    version=get_version(),
-    description="Binary to Gray code conversion package for efficient data encoding.",
+    version=get_version(), # version="0.1.3",
+    description="Binary to Gray code conversion package for efficient data encoding. Gri Kod dönüştürücü.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Mehmet Keçeci",
     maintainer="Mehmet Keçeci",
     author_email="mkececi@yaani.com",
     maintainer_email="mkececi@yaani.com",
+    ext_modules=cythonize(extensions, compiler_directives={'language_level': 3}),
+    zip_safe=False,
     url="https://github.com/WhiteSymmetry/grikod3",
     #packages=find_packages(),
     packages=find_packages(
