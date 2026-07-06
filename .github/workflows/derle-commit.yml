@@ -8,8 +8,11 @@ on:
         required: true
         default: 'main'
 
+permissions:
+  contents: write   # 🔑 Push izni
+
 jobs:
-  build_and_commit:
+  build:
     name: Derle ve commit et (${{ matrix.os }} / py${{ matrix.python-version }})
     runs-on: ${{ matrix.os }}
     strategy:
@@ -23,7 +26,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           ref: ${{ github.event.inputs.branch }}
-          token: ${{ secrets.GITHUB_TOKEN }}  # push için gerekli
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Python kurulumu
         uses: actions/setup-python@v6
@@ -38,12 +41,12 @@ jobs:
       - name: Derle
         run: |
           python setup.py build_ext --inplace
-          # Derlenen dosyayı grikod3/ klasörüne kopyala (zaten orada olmalı)
 
       - name: Değişiklikleri commit et
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add grikod3/*.so grikod3/*.pyd grikod3/*.dylib || true
+          # Mevcut dosyaları ekle (hata verirse devam et)
+          git add grikod3/*.so grikod3/*.pyd grikod3/*.dylib 2>/dev/null || true
           git commit -m "Derlenmiş uzantılar (py${{ matrix.python-version }} / ${{ matrix.os }})" || echo "Değişiklik yok"
           git push
