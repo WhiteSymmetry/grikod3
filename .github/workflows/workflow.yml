@@ -23,6 +23,7 @@ jobs:
         uses: pypa/cibuildwheel@v2.22.0
         env:
           CIBW_BUILD: "cp311-* cp312-* cp313-* cp314-*"
+          CIBW_PRERELEASE_PYTHONS: True   # 🆕 3.14 gibi prerelease sürümleri dahil et
           CIBW_ARCHS: auto64
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
 
