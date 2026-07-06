@@ -12,6 +12,7 @@ from Cython.Build import cythonize
 
 setup(
     ext_modules=cythonize("grikod3/grikod3.py"),
+    zip_safe=False,
 )
 
 # UTF-8 encoding sorunlarını çöz
