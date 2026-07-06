@@ -3,18 +3,19 @@ name: Pixi CI
 on:
   workflow_dispatch:
 
-# OIDC (Trusted Publishers) bağlantısı için bu izin bloğu ŞARTTIR
 permissions:
   id-token: write
   contents: read
 
 jobs:
   test-and-build:
+    # Matristen gelen işletim sistemini dinamik olarak kullanır
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        python-version: ["3.11", "3.12", "3.13", "3.14"]
+        # 🚀 Tüm ana işletim sistemlerini matrise ekledik
+        os: [ubuntu-latest, windows-latest, macos-13, macos-latest]
+        python-version: ["3.11", "3.12", "3.13"]
       fail-fast: false
 
     steps:
@@ -30,7 +31,7 @@ jobs:
         uses: prefix-dev/setup-pixi@v0.10.0
         with:
           pixi-version: "latest"
-          cache: false # Kilit dosyası yoksa hatayı engellemek için false yapın
+          cache: true
 
       - name: 📦 Install dependencies
         run: pixi install --frozen
@@ -42,5 +43,5 @@ jobs:
         run: pixi run test
 
       - name: 🏗️ Paket Derle ve prefix.dev'e Yayınla (Trusted Publishing)
-        # URL'in sonuna kendi kanal adınızı ekleyin
+        # Hangi sunucuda çalışıyorsa (Win/Mac/Linux) o platformun paketini derleyip yükler
         run: pixi publish --target-channel https://prefix.dev/bilgi
