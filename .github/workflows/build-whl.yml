@@ -24,12 +24,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install cython setuptools wheel
 
-      # Test derlemesi (hata varsa burada yakalanır)
-      - name: Test Cython compilation
-        run: |
-          python setup.py build_ext --inplace
-          ls -la grikod3/
-
       - name: Install cibuildwheel
         run: pip install cibuildwheel
 
@@ -39,7 +33,7 @@ jobs:
           CIBW_BUILD: "cp311-* cp312-* cp313-* cp314-*"
           CIBW_SKIP: "*-musllinux_*"
           CIBW_ARCHS: "auto64"
-          CIBW_BUILD_VERBOSITY: 3   # Detaylı log
+          CIBW_BUILD_VERBOSITY: 3   # Detaylı log için
 
       - name: Upload wheels
         uses: actions/upload-artifact@v7
