@@ -37,9 +37,9 @@ jobs:
       - name: Derleme
         run: |
           if [[ "$RUNNER_OS" == "Windows" ]]; then
-            py -${{ matrix.python-version }} setup.py build_ext --inplace
+            py -${{ matrix.python-version }} setup.py build_ext --inplace --verbose
           else
-            python${{ matrix.python-version }} setup.py build_ext --inplace
+            python${{ matrix.python-version }} setup.py build_ext --inplace --verbose
           fi
           # Çıktıları listele
           if [[ "$RUNNER_OS" == "Windows" ]]; then
@@ -49,12 +49,21 @@ jobs:
           fi
         shell: bash
 
-      - name: Commit ve push
+      - name: Derleme
+        run: |
+          python setup.py build_ext --inplace
+          ls -la grikod3/   # Kontrol için
+      
+      - name: Commit ve push (eğer dosyalar varsa)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main
-          git add grikod3/*.so grikod3/*.pyd
-          git commit -m "Derlenmiş uzantılar (py${{ matrix.python-version }} / ${{ matrix.os }})" || echo "Değişiklik yok"
-          git push origin main
+          git pull --rebase origin main || true
+          git add grikod3/*.so grikod3/*.pyd || true
+          if git diff --cached --quiet; then
+            echo "Değişiklik yok, commit atlanıyor."
+          else
+            git commit -m "Derlenmiş uzantılar (py${{ matrix.python-version }} / ${{ matrix.os }})"
+            git push origin main
+          fi
         shell: bash
