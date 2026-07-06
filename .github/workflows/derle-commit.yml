@@ -1,0 +1,49 @@
+name: Derle ve Commit Et
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Hedef branch'
+        required: true
+        default: 'main'
+
+jobs:
+  build_and_commit:
+    name: Derle ve commit et (${{ matrix.os }} / py${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ['3.11', '3.12', '3.13', '3.14']
+
+    steps:
+      - name: Kodu çek
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.inputs.branch }}
+          token: ${{ secrets.GITHUB_TOKEN }}  # push için gerekli
+
+      - name: Python kurulumu
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Gerekli paketleri yükle
+        run: |
+          python -m pip install --upgrade pip
+          pip install cython setuptools
+
+      - name: Derle
+        run: |
+          python setup.py build_ext --inplace
+          # Derlenen dosyayı grikod3/ klasörüne kopyala (zaten orada olmalı)
+
+      - name: Değişiklikleri commit et
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add grikod3/*.so grikod3/*.pyd grikod3/*.dylib || true
+          git commit -m "Derlenmiş uzantılar (py${{ matrix.python-version }} / ${{ matrix.os }})" || echo "Değişiklik yok"
+          git push
