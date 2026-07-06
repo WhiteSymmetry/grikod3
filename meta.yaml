@@ -37,6 +37,7 @@ requirements:
     - wheel
     - setuptools_scm
     - cython
+    - pytest
   run:
     - python
 
