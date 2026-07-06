@@ -22,7 +22,7 @@ jobs:
       - name: Build wheels with cibuildwheel
         uses: pypa/cibuildwheel@v4.1.0
         env:
-          CIBW_BUILD: "cp311-* cp312-* cp313-* cp314-* cp315-*"
+          CIBW_BUILD: "cp314-* cp315-*"
           CIBW_ENABLE: "cpython-prerelease"   # 3.14, 3.15 için
           CIBW_ARCHS: "auto64"
           CIBW_MANYLINUX_X86_64_IMAGE: "manylinux_2_28"
