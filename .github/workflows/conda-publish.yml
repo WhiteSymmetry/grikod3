@@ -52,7 +52,7 @@ jobs:
       # ================================================================
       # ADIM 2: PyPI'den Source URL ve BLAKE2b-256 Hash Çek
       # ================================================================
-      - name: Fetch PyPI source URL and BLAKE2b-256 hash
+      - name: Fetch PyPI source URL and BLAKE2b-256 hash (sdist only)
         id: pypi_source
         run: |
           echo "📦 PyPI source bilgileri çekiliyor (sürüm: $PKG_VERSION)..."
@@ -60,21 +60,24 @@ jobs:
           PYPI_JSON=$(curl -s "https://pypi.org/pypi/grikod3/$PKG_VERSION/json")
           
           SOURCE_INFO=$(echo "$PYPI_JSON" | python3 -c "
-          import sys, json
-          data = json.load(sys.stdin)
+      import sys, json
+      data = json.load(sys.stdin)
+      
+      # Sadece sdist (packagetype 'sdist') bul
+      for url_info in data['urls']:
+          if url_info['packagetype'] == 'sdist':
+              print(f\"URL={url_info['url']}\")
+              print(f\"HASH={url_info['digests']['blake2b_256']}\")
+              break
+      else:
+          print(\"ERROR: sdist not found\")
+          sys.exit(1)
+      ")
           
-          for url_info in data['urls']:
-              if url_info['packagetype'] == 'sdist':
-                  print(f\"URL={url_info['url']}\")
-                  print(f\"HASH={url_info['digests']['blake2b_256']}\")
-                  break
-          else:
-              for url_info in data['urls']:
-                  if url_info['packagetype'] == 'bdist_wheel':
-                      print(f\"URL={url_info['url']}\")
-                      print(f\"HASH={url_info['digests']['blake2b_256']}\")
-                      break
-          ")
+          if echo "$SOURCE_INFO" | grep -q "^ERROR"; then
+            echo "❌ HATA: PyPI'de sdist bulunamadı!"
+            exit 1
+          fi
           
           PYPI_URL=$(echo "$SOURCE_INFO" | grep "^URL=" | cut -d'=' -f2-)
           PYPI_HASH=$(echo "$SOURCE_INFO" | grep "^HASH=" | cut -d'=' -f2-)
