@@ -22,6 +22,7 @@ setuptools_scm = ">=9.2.2"
 rattler-build = ">=0.67.0"
 numpy = ">=2.4.6"
 cython = ">=3.2.8"
+pytest = ">=9.1.1"
 
 [tasks]
 build = "python -m build"
