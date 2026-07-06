@@ -4,6 +4,6 @@ __version__ = "0.1.4"
 __license__ = "AGPL-3.0-or-later"
 __description__ = "Binary to Gray code conversion package for efficient data encoding."
 __author__ = "Mehmet Keçeci"
-__url__ = "https://github.com/KuantumBS/grikod2"
-__docs__ = "https://kuantumbs.github.io/grikod2"  # Opsiyonel: Dokümantasyon linki
-__dependencies__ = ["python>=3.10"]  # Diğer bağımlılıkları da ekleyebilirsiniz
+__url__ = "https://github.com/WhiteSymmetry/grikod3"
+__docs__ = "https://kuantumbs.github.io/grikod3"  # Opsiyonel: Dokümantasyon linki
+__dependencies__ = ["python>=3.11"]  # Diğer bağımlılıkları da ekleyebilirsiniz
