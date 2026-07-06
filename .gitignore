@@ -53,3 +53,18 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# --------------------------------------------------
+# Python / Cython derleme ara ürünleri (isteğe bağlı)
+# --------------------------------------------------
+*.c
+*.pyc
+__pycache__/
+
+# --------------------------------------------------
+# **Özel istisnalar:** grikod3/ klasöründeki derlenmiş uzantıları izle
+# --------------------------------------------------
+!grikod3/*.so
+!grikod3/*.pyd
+!grikod3/*.dylib
+!grikod3/*.c
