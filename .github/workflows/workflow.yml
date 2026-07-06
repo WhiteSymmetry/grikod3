@@ -23,7 +23,7 @@ jobs:
         uses: pypa/cibuildwheel@v4.1.0
         env:
           CIBW_BUILD: "cp311-* cp312-* cp313-* cp314-* cp315-*"
-          CIBW_ENABLE: "cpython-prerelease"   # 3.14, 3.15 için
+          CIBW_ENABLE: "cpython-prerelease"
           CIBW_ARCHS: "auto64"
           CIBW_MANYLINUX_X86_64_IMAGE: "manylinux_2_28"
 
@@ -33,9 +33,36 @@ jobs:
           name: wheels-${{ matrix.os }}
           path: wheelhouse/*.whl
 
+  build_sdist:
+    name: Build source distribution (sdist)
+    runs-on: ubuntu-latest
+    needs: build_wheels  # İsteğe bağlı, paralel de çalışabilir
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.x'
+
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install build
+
+      - name: Build sdist
+        run: python -m build --sdist
+
+      - name: Upload sdist as artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: sdist
+          path: dist/*.tar.gz
+
   publish:
     name: Publish to PyPI
-    needs: build_wheels
+    needs: [build_wheels, build_sdist]  # Tüm işler bittikten sonra
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -47,9 +74,10 @@ jobs:
         with:
           path: dist
 
-      - name: Flatten wheel files to dist/
+      - name: Flatten wheel files
         run: |
           find dist -name "*.whl" -exec mv -v {} dist/ \;
+          find dist -name "*.tar.gz" -exec mv -v {} dist/ \;
           find dist -type d -empty -delete
           ls -la dist/
 
