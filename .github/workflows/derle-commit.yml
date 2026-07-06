@@ -49,23 +49,12 @@ jobs:
           fi
         shell: bash
       
-      - name: Commit ve push (eğer dosyalar varsa)
+      - name: Commit ve push (zorla)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git pull --rebase origin main || true
-      
-          # Dosyaların var olup olmadığını kontrol et
-          if ls grikod3/*.so 1> /dev/null 2>&1 || ls grikod3/*.pyd 1> /dev/null 2>&1; then
-            git add grikod3/*.so grikod3/*.pyd || true
-            if git diff --cached --quiet; then
-              echo "Değişiklik yok, commit atlanıyor."
-            else
-              git commit -m "Derlenmiş uzantılar (py${{ matrix.python-version }} / ${{ matrix.os }})"
-              git push origin main
-            fi
-          else
-            echo "⚠️ Derleme başarısız, dosyalar oluşmadı. Commit yapılmıyor."
-            # İsterseniz burada exit 1 ile workflow'u durdurabilirsiniz
-          fi
+          git add -f grikod3/*.so grikod3/*.pyd || true
+          git commit -m "Derlenmiş uzantılar (py${{ matrix.python-version }} / ${{ matrix.os }})" || echo "Değişiklik yok"
+          git push origin main || true
         shell: bash
