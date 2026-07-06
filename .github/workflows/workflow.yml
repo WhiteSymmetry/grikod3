@@ -1,39 +1,55 @@
-name: Publish to PyPI (sdist only)
+name: Publish to PyPI-Resmî
 
 on:
-  workflow_dispatch:   # Sadece manuel tetikleme
+  workflow_dispatch:
 
 jobs:
-  publish:
-    name: Publish to PyPI
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
+  build_wheels:
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
-        with:
-          ref: main
-          fetch-depth: 0
+      - uses: actions/checkout@v7
 
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: '3.x'
 
-      - name: Install build dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install build
+      - name: Build wheels with cibuildwheel
+        uses: pypa/cibuildwheel@v4.1.0  # 🆕 En son sürüm
+        env:
+          # 3.11'den 3.15'e kadar tüm sürümler
+          CIBW_BUILD: "cp311-* cp312-* cp313-* cp314-* cp315-*"
+          # Python 3.15 için opt-in gerekebilir (dökümana göre)[reference:2]
+          CIBW_ENABLE: "cpython-prerelease"
+          CIBW_ARCHS: "auto64"
+          CIBW_MANYLINUX_X86_64_IMAGE: "manylinux_2_28"
 
-      - name: Build source distribution (sdist)
-        run: python -m build --sdist
+      - name: Upload wheels as artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: wheels-${{ matrix.os }}
+          path: wheelhouse/*.whl
 
-      - name: Publish to PyPI (sadece sdist)
+  publish:
+    name: Publish to PyPI
+    needs: build_wheels
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Download all wheel artifacts
+        uses: actions/download-artifact@v7
+        with:
+          path: dist
+
+      - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@v1.14.0
         with:
           packages-dir: dist/
-          # İsteğe bağlı: sadece .tar.gz dosyalarını yükle
-          # packages: dist/*.tar.gz
