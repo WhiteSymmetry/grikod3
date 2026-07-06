@@ -30,9 +30,7 @@ jobs:
         uses: prefix-dev/setup-pixi@v0.10.0
         with:
           pixi-version: "latest"
-          # Not: setup-pixi zaten kendi içinde dahili önbellekleme (caching) yapar. 
-          # Manuel actions/cache adımına genelde gerek kalmaz.
-          cache: true 
+          cache: false # Kilit dosyası yoksa hatayı engellemek için false yapın
 
       - name: 📦 Install dependencies
         run: pixi install --frozen
