@@ -1,7 +1,7 @@
 [workspace]
 preview = ["pixi-build"]
 authors = ["Mehmet Keçeci <mkececi@yaani.com>"]
-channels = ["pypi", "https://prefix.dev/conda-forge", "conda-forge"]
+channels = ["conda-forge"]
 platforms = ["linux-64"]
 name = "grikod3"
 version = "0.1.6"
@@ -14,12 +14,20 @@ license = "AGPL-3.0-or-later"
 [dependencies]
 python = ">=3.11"
 pip = ">=25.3"
-build = "*"        # <--- python -m build komutunun çalışması için bu şarttır
+# ❌ HATALI: build = "*" satırını SİLİN veya aşağıdaki gibi DEĞİŞTİRİN:
+python-build = "*"  # Conda-Forge'daki karşılığı budur
+conda-build = ">=26.3.0"
+setuptools = ">=82.0.1"
+wheel = ">=0.47.0"
+# hatchling = ">=1.29.0"  <- pyproject.toml setuptools kullandığı için bu satır da gereksizdir, silebilirsiniz.
+setuptools_scm = ">=9.2.2"
+rattler-build = ">=0.67.0"
 numpy = ">=2.4.6"
 cython = ">=3.2.8"
 pytest = ">=9.1.1"
 
 [tasks]
+# Artık python-build yüklendiği için bu komut hata vermez:
 build = "python -m build"
 start = "python -c 'import grikod3; print(grikod3.__version__)'"
 install = "pip install -e ."
