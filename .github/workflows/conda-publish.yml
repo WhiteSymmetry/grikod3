@@ -1,5 +1,3 @@
-# .github/workflows/conda-build-publish.yml
-
 name: Conda-Build, Test, and Publish Package
 
 on:
