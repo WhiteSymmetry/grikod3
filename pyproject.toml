@@ -1,28 +1,26 @@
 # pyproject.toml
 
 [build-system]
-requires = ["setuptools>=61.0", "cython>=3.0.0"]
+requires = ["setuptools>=82.0.1", "cython>=3.2.5"]
 build-backend = "setuptools.build_meta"
 
 [tool.cibuildwheel]
 build = "cp311-* cp312-* cp313-* cp314-*"
 skip = "*-musllinux_*"
 archs = "auto64"
-build-verbosity = 3   # Detaylı log için
+build-verbosity = 3
 
 [project]
 name = "grikod3"
 version = "0.1.3"
 dynamic = ["keywords", "maintainers"]
-license = "AGPL-3.0-or-later"  # SPDX ID
-
+license = "AGPL-3.0-or-later"  # SPDX ID # license = {text = "AGPL-3.0-or-later"}
 # Diğer proje bilgileri (isteğe bağlı ama tavsiye edilir)
-authors = [
-    { name="Mehmet Keçeci", email="mkececi@yaani.com" },
-]
-description = "Binary to Gray code conversion package for efficient data encoding."
+authors = [{ name="Mehmet Keçeci", email="mkececi@yaani.com" }]
+description = "Binary to Gray code conversion package for efficient data encoding. Gri Kod dönüştürücü."
 readme = "README.md"
 requires-python = ">=3.11"
+keywords = ["gray", "code", "converter"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
