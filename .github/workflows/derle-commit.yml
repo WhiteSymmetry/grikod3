@@ -49,15 +49,13 @@ jobs:
           fi
         shell: bash
 
-      - name: Commit and push if changes
+      - name: Commit ve push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add grikod3/*.so grikod3/*.pyd || true
-          if ! git diff --cached --quiet; then
-            git commit -m "Derlenmiş uzantılar (py${{ matrix.python-version }} / ${{ matrix.os }})"
-            git push
-          else
-            echo "Değişiklik yok, commit atlanıyor."
-          fi
+          BRANCH_NAME="derlenmis-${{ matrix.os }}-py${{ matrix.python-version }}"
+          git checkout -b $BRANCH_NAME || git checkout $BRANCH_NAME
+          git add -f grikod3/*.so grikod3/*.pyd
+          git commit -m "Derlenmiş uzantılar ($BRANCH_NAME)" || echo "Değişiklik yok"
+          git push origin $BRANCH_NAME --force
         shell: bash
