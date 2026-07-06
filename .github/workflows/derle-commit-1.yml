@@ -1,4 +1,4 @@
-name: Derle ve Commit Et (Tek Job'da Topla)
+name: Derle ve Commit Et (Tek Job-upload2)
 
 on:
   workflow_dispatch:
