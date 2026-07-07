@@ -167,6 +167,26 @@ Binary: İkili: 1111 -> Gri Kod: 1000
 #111:100
 ```
 
+# Graycode-Binary & Binary-Graycode
+
+```python
+from grikod2 import ikili_2_gri_kod
+grikod2.ikili_2_gri_kod("1010")
+```
+
+```python
+from grikod3 import ikili_2_gri_kod, grikod2ikili, run_interactive_converter
+# Örnek kullanımlar:
+print(grikod2ikili("1011"))   # Çıktı: "1101" (doğrulama: 1011 gri kodu 1101 ikiliğe denk gelir)
+print(grikod2ikili("0"))      # "0"
+print(grikod2ikili("111"))    # "101"
+```
+
+```python
+from grikod3 import ikili_2_gri_kod, grikod2ikili, run_interactive_converter
+run_interactive_converter()
+```
+
 ```python
 import grikod3
 
