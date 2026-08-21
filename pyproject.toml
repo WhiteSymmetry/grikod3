@@ -1,7 +1,7 @@
 # pyproject.toml
 
 [build-system]
-requires = ["setuptools>=61.0", "cython>=3.0.0"]
+requires = ["setuptools>=84.0.0", "cython>=3.0.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -11,7 +11,7 @@ description = "Binary to Gray code conversion package for efficient data encodin
 readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "AGPL-3.0-or-later"}
-authors = [{name = "Mehmet Keçeci", email = "mkececi@yaani.com"}]
+authors = [{name = "Mehmet Keçeci", email = "enfo@tuta.io"}]
 keywords = ["gray", "code", "converter"]   # static olarak tanımlandı
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -24,7 +24,7 @@ dependencies = [
 ]
 
 [package.build-dependencies]
-setuptools = ">=61.0"
+setuptools = ">=84.0.0"
 cython = ">=3.0.0"
 compilers = "*"  # Linux ortamında Cython kodunu derlemek için GCC/Clang kurar
 
