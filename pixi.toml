@@ -1,6 +1,6 @@
 [workspace]
 preview = ["pixi-build"]
-authors = ["Mehmet Keçeci <mkececi@yaani.com>"]
+authors = ["Mehmet Keçeci <enfo@tuta.io>"]
 # 🌍 Sadece standart conda-forge kalsın. Çözücü uyuşmazlıklarını %100 bitirir:
 channels = ["conda-forge"]
 platforms = ["linux-64", "win-64", "osx-64", "osx-arm64"]
