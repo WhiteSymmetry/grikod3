@@ -22,7 +22,6 @@ def ikili_2_gri_kod(i2grik: str) -> str:
 def grikod2ikili(grik2i: str) -> str:
     """
     Gri Kod string'ini ikili (binary) string'e dönüştürür.
-    
     Algoritma:
         - İlk bit aynen alınır.
         - Sonraki her bit için: yeni_ikili_bit = önceki_ikili_bit XOR mevcut_gri_bit
