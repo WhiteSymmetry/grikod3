@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "grikod3"
-version = "0.1.6"
+version = "0.1.7"
 description = "Binary to Gray code conversion package for efficient data encoding."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -34,7 +34,7 @@ installer = "uv"
 no-build-isolation = true
 
 [tool.pixi.package.build-dependencies]
-setuptools = ">=61.0"
+setuptools = ">=84.0.0"
 cython = ">=3.0.0"
 compilers = "*"
 
@@ -43,7 +43,7 @@ Homepage = "https://github.com/WhiteSymmetry/grikod3"
 Repository = "https://github.com/WhiteSymmetry/grikod3"
 
 [tool.cibuildwheel]
-build = "cp311-* cp312-* cp313-* cp314-*"
+build = "cp311-* cp312-* cp313-* cp314-* cp315-*"
 skip = "*-musllinux_*"
 archs = "auto64"
 build-verbosity = 3
