@@ -3,7 +3,7 @@
 schema_version: 1
 
 context:
-  version: 0.1.6
+  version: 0.1.7
   name: grikod3
 
 package:
@@ -11,9 +11,10 @@ package:
   version: ${{ version }}
 
 source:
+  path: .
   url: https://pypi.org{{ name }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
-  sha256: 6c7169b6a987f3e7af4bdf569a288587f2d83aeb6f83f0e080783f46f4d95844
-
+  sha256: 
+  
 build:
   number: 1
   script: python -m pip install --no-deps --no-build-isolation --ignore-installed .
