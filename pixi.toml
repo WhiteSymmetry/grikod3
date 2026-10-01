@@ -1,8 +1,7 @@
 [workspace]
 preview = ["pixi-build"]
 authors = ["Mehmet Keçeci <enfo@tuta.io>"]
-# 🌍 Sadece standart conda-forge kalsın. Çözücü uyuşmazlıklarını %100 bitirir:
-channels = ["conda-forge"]
+channels = ["https://prefix.dev/bilgi", "bilgi", "pypi", "https://prefix.dev/conda-forge", "https://conda.modular.com/max-nightly", "conda-forge", "https://repo.prefix.dev/modular-community"]
 platforms = ["linux-64", "win-64", "osx-64", "osx-arm64"]
 name = "grikod3"
 version = "0.1.7"
