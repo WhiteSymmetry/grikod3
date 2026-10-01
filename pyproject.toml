@@ -55,4 +55,4 @@ include = ["grikod3*"]
 include-package-data = true
 
 [tool.setuptools.package-data]
-"*" = ["*.py", "*.pyi", "*.pyd", "*.so"]
+"*" = ["*.py", "*.pyx", "*.pyi", "*.pyd", "*.so"]  # .pyx ekleyin, kaynak derleme için
