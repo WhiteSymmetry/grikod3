@@ -3,7 +3,7 @@
 schema_version: 1
 
 context:
-  version: 0.1.7
+  version: 0.1.8
   name: grikod3
 
 package:
@@ -42,10 +42,10 @@ requirements:
     - numpy
 
 about:
-  homepage: https://github.com
+  homepage: https://github.com/WhiteSymmetry/grikod3
   license: AGPL-3.0-or-later
   summary: 'grikod3'
-  repository: https://github.com
+  repository: https://github.com/WhiteSymmetry/grikod3
 
 extra:
   recipe-maintainers:
