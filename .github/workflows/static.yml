@@ -6,6 +6,10 @@ on:
     branches: ["main"]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pull-requests: write
+
 # Set permissions for GitHub Pages deployment
 permissions:
   contents: read
