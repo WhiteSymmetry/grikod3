@@ -3,6 +3,10 @@ name: Build wheels with cibuildwheel
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   build_wheels:
     name: Build wheels on ${{ matrix.os }}
