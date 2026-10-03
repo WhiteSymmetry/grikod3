@@ -4,7 +4,8 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write   # 🔑 Push izni
+  contents: read
+  pull-requests: write
 
 jobs:
   build_and_commit:
