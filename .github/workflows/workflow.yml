@@ -24,7 +24,7 @@ jobs:
           python-version: '3.x'
 
       - name: Build wheels with cibuildwheel
-        uses: pypa/cibuildwheel@v4.1.0
+        uses: pypa/cibuildwheel@v4.2.1
         env:
           CIBW_BUILD: "cp311-* cp312-* cp313-* cp314-*" #  cp315-*: The version '3.15' with architecture 'x64' was not found for 
           CIBW_ENABLE: "cpython-prerelease"
