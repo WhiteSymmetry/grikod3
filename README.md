@@ -1,7 +1,7 @@
 # grikod3 (Grikod, Gri Kod, Gray Code, GrayCode): binary ↔ grikod
 ---
 
-# grikod3 <img src="https://github.com/WhiteSymmetry/grikod3/blob/main/docs/grikod3_logo.jpg" alt="logo" align="right" height="140"/>
+# grikod3 <img src="https://github.com/WhiteSymmetry/grikod3/blob/main/docs/grikod3_logo.jpg" alt="grikod3" align="right" height="140"/>
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15352206.svg)](https://doi.org/10.5281/zenodo.15352206)
 
