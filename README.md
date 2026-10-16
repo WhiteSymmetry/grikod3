@@ -3,9 +3,11 @@
 
 # grikod3 <img src="https://github.com/WhiteSymmetry/grikod3/blob/main/docs/logo.jpg" alt="grikod3" align="right" height="140"/>
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15352206.svg)](https://doi.org/10.5281/zenodo.15352206)
+---
 
-[![WorkflowHub DOI](https://img.shields.io/badge/DOI-10.48546%2Fworkflowhub.datafile.13.1-blue)](https://doi.org/10.48546/workflowhub.datafile.13.1)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23422956.svg)](https://doi.org/10.5281/zenodo.23422956)
+
+[![WorkflowHub DOI](https://img.shields.io/badge/DOI-10.48546%2Fworkflowhub.datafile.13.1-blue)](https://doi.org/10.48546/workflowhub.datafile.***)
 
 [![Anaconda-Server Badge](https://anaconda.org/bilgi/grikod3/badges/version.svg)](https://anaconda.org/bilgi/grikod3)
 [![Anaconda-Server Badge](https://anaconda.org/bilgi/grikod3/badges/latest_release_date.svg)](https://anaconda.org/bilgi/grikod3)
@@ -251,21 +253,33 @@ If this library was useful to you in your research, please cite us. Following th
 ### APA
 
 ```
-Keçeci, M. (2025). grikod3 [Data set]. WorkflowHub. https://doi.org/10.48546/workflowhub.datafile.13.1
 
-Keçeci, M. (2025). grikod3. GitHub, PYPI, Anaconda, Zenodo. https://doi.org/10.5281/zenodo.15352206
+Keçeci, M. (2026). Grikod3 (Version 0.1.7) [Computer software]. Open Science Articles (OSAs), Zenodo. https://doi.org/10.5281/zenodo.23422956
 
 ```
 
 ### Chicago
 
 ```
-Keçeci, Mehmet. grikod3 [Data set]. WorkflowHub. https://doi.org/10.48546/workflowhub.datafile.13.1
 
-Keçeci, Mehmet. "grikod3". Zenodo, 06 Mayıs 2025. https://doi.org/10.5281/zenodo.15352206
+Keçeci, M. Grikod3. V. 0.1.7. Open Science Articles (OSAs), Zenodo, released October 16, 2026. https://doi.org/10.5281/zenodo.23422956.
 
 ```
 
+### BibTeX
+
+@misc{kececi_2026_23422956,
+  author       = {Keçeci, Mehmet},
+  title        = {Grikod3},
+  month        = oct,
+  year         = 2026,
+  publisher    = {Open Science Articles (OSAs), Zenodo},
+  version      = {0.1.7},
+  doi          = {10.5281/zenodo.23422956},
+  url          = {https://doi.org/10.5281/zenodo.23422956},
+}
+
+---
 
 ### Lisans (Türkçe) / License (English)
 
