@@ -16,7 +16,7 @@ authors:
     orcid: 'https://orcid.org/0000-0001-9937-9839'
 identifiers:
   - type: doi
-    value: 10.5281/zenodo.15352206
+    value: 10.5281/zenodo.23422956
   - type: doi
     value: 10.48546/workflowhub.datafile.13.1
 repository-code: 'https://github.com/WhiteSymmetry/grikod3'
